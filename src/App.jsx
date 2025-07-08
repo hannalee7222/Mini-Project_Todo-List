@@ -19,7 +19,7 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then(res => 
+      .then((res) => 
         setTodo((prev) => 
           prev.map((el) => (el.id === 
           currentTodo ? res : el))
@@ -33,10 +33,12 @@ function App() {
 
   useEffect(() => {
    if(data) setTodo(data);
-  }, [isLoading])
+  }, [data])
 
   return (
     <>
+      <h1>TODO LIST</h1>
+      <Clock />
       <Advice />
     <button onClick={() => setIsTimer(prev => !prev)}
       >
@@ -147,8 +149,8 @@ const Advice = () => {
     <>
       {!isLoading && (
         <>
-          <div>{data.message}</div>
-          <div>-{data.author}-</div>
+          <div className='advice'>{data.message}</div>
+          <div className='advice'>-{data.author}-</div>
         </>
      )}
     </>
@@ -164,7 +166,7 @@ const Clock = () => {
     }, 1000)
   }, []);
 
-  return <div>{time.toLocaleTimeString()}</div>;
+  return <div className='clock'>{time.toLocaleTimeString()}</div>;
 };
 
 const formatTime = (seconds) => {
